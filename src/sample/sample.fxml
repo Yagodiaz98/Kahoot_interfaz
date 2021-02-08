@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <TabPane prefHeight="491.0" prefWidth="616.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Servidor">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TextArea layoutX="15.0" layoutY="158.0" prefHeight="290.0" prefWidth="588.0" />
+                                <Button fx:id="btnActivarServidor" layoutX="90.0" layoutY="32.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="437.0" text="ACTIVAR SERVIDOR" textFill="#b511a7">
+                                    <font>
+                                        <Font name="Bernard MT Condensed" size="34.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Cliente">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</GridPane>
