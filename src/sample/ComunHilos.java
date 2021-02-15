@@ -27,7 +27,7 @@ public class ComunHilos {
         setPreguntaActual();
     }
 
-    //OBTENEMOS UNA PREGUNTA ALEATORIA
+    //OBTENEMOS UNA PREGUNTA ALEATORIA Y LA PREPARAMOS PARA ENVIARLA A HILOSERVIDOR
     public void setPreguntaActual(){
         int n= new Random().nextInt(listaPreguntas.size());
         preguntaActual=listaPreguntas.get(n);
