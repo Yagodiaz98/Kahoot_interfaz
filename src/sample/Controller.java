@@ -1,10 +1,13 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -13,20 +16,64 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-
+    Cliente cliente;
     @FXML
     Button btnActivarServidor;
     @FXML
     Button btnDesactivarServidor;
     @FXML
-    TextArea txtServidor;
+    TextArea txtCliente;
+    @FXML
+    Button btnPregunta;
+    @FXML
+    Button btnEnviar;
+    @FXML
+    Button btnRecibirResultado;
+    @FXML
+    TextField txtRespuesta;
 
 
     ServerSocket servidor;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+        int puerto = 44444;
+        Socket s = null;
+
+        String nombre = "";
+        nombre= JOptionPane.showInputDialog("Introduce tu nombre o nick:");
+        nombre=(nombre=="")?"Yago":nombre;
+
+        try {
+            s = new Socket("localhost", puerto);
+            cliente = new Cliente(s, nombre);
+            new Thread(cliente).start();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "IMPOSIBLE CONECTAR CON EL SERVIDOR\n" + e.getMessage(),
+                    "<<MENSAJE DE ERROR:1>>", JOptionPane.ERROR_MESSAGE);
+        }
+
+        btnEnviar.setVisible(false);
+        btnRecibirResultado.setVisible(false);
     }
+
+    public void callBackPregunta(ActionEvent actionEvent) throws IOException {
+        txtCliente.setText(cliente.getPregunta());
+        btnPregunta.setVisible(false);
+        btnEnviar.setVisible(true);
+
+    }
+    public void callBackEnviar(ActionEvent actionEvent) throws IOException {
+        String respuesta = txtRespuesta.getText();
+        cliente.enviarRespuesta(respuesta);
+        btnEnviar.setVisible(false);
+        btnRecibirResultado.setVisible(true);
+    }
+
+    public void callBackRecibirResultado() throws IOException {
+        txtCliente.setText(cliente.recibirResultado());
+    }
+
+
 
 }

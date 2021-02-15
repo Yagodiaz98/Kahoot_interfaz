@@ -1,11 +1,14 @@
 package sample;
 
+import javafx.fxml.FXML;
+
 import javax.swing.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+
 
 public class Cliente implements Runnable{
     //private static final long serialVersionUID = 1L;
@@ -14,6 +17,8 @@ public class Cliente implements Runnable{
     DataOutputStream salida;
     ObjectInputStream entradaObjetos;
     String nombre;
+    String pregunta;
+
 
     public Cliente(Socket socket, String nombre){
 
@@ -32,18 +37,18 @@ public class Cliente implements Runnable{
 
             //Recibo la pregunta del servidor
             //Pregunta pregunta= (Pregunta) entradaObjetos.readObject();
-            String pregunta=entrada.readUTF();
+            //String pregunta=entrada.readUTF();
 
             //Mostrar pregunta en pantalla y esperar la respuesta por teclado
             //String respuesta=JOptionPane.showInputDialog(pregunta.toString());
-            String respuesta= JOptionPane.showInputDialog(pregunta);
+            //String respuesta= JOptionPane.showInputDialog(pregunta);
 
             //Envío la respuesta al servidor
-            salida.writeUTF(respuesta);
+            //salida.writeUTF(respuesta);
 
             //Recibo del servidor si he acertado
-            String resultado=entrada.readUTF();
-            JOptionPane.showMessageDialog(null,  resultado);
+            //String resultado=entrada.readUTF();
+            //JOptionPane.showMessageDialog(null,  resultado);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,7 +57,7 @@ public class Cliente implements Runnable{
         }*/
     }
 
-    public static void main(String args[]) {  //Orden de ejecución: Main, constructor, run
+    /*public static void main(String args[]) {  //Orden de ejecución: Main, constructor, run
         int puerto = 44444;
         Socket s = null;
 
@@ -69,16 +74,16 @@ public class Cliente implements Runnable{
                     "<<MENSAJE DE ERROR:1>>", JOptionPane.ERROR_MESSAGE);
         }
 
-    }
+    }*/
 
     public void run(){
-        //De momento no hace nada en el futuro, haremos que se juegue más de una palabra
-        /*String texto = "";
+        /*//De momento no hace nada en el futuro, haremos que se juegue más de una palabra
+        //String texto = "";
         boolean repetir=true;
         while (repetir) {
             try {
-                texto = entrada.readUTF();
-                System.out.println(texto);
+                pregunta = entrada.readUTF();
+                System.out.println(pregunta);
             } catch (IOException e) {
                 System.out.println("No se puede conectar con el servidor");
                 repetir = false;
@@ -93,5 +98,19 @@ public class Cliente implements Runnable{
         }*/
     }
 
+    public String getPregunta() throws IOException {
+        pregunta=entrada.readUTF();
+        return pregunta;
+    }
+
+    public void enviarRespuesta(String respuesta) throws IOException {
+        salida.writeUTF(respuesta);
+    }
+
+    public String recibirResultado() throws IOException {
+        String resultado=entrada.readUTF();
+
+        return resultado;
+    }
 }
 

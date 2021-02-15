@@ -8,8 +8,8 @@ public class HiloServidor extends Thread{
     ComunHilos comun;
     DataInputStream entrada;
     DataOutputStream salida;
-    ObjectOutputStream salidaObjetos;
-    ObjectInputStream entradaObjetos;
+    /*ObjectOutputStream salidaObjetos;
+    ObjectInputStream entradaObjetos;*/
     String nombreCliente;
 
     //Existe un HiloServidor para cada cliente, encargado de comunicarse con él
