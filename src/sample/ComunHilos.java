@@ -32,5 +32,13 @@ public class ComunHilos {
         int n= new Random().nextInt(listaPreguntas.size());
         preguntaActual=listaPreguntas.get(n);
     }
+    public Pregunta getPreguntaActual(){
+        return preguntaActual;
+    }
+
+    public int getConexiones() { return conexiones;	}
+    public synchronized void setConexiones(int conexiones) {
+        this.conexiones = conexiones;
+    }
 
 }
