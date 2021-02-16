@@ -45,8 +45,7 @@ public class HiloServidor extends Thread{
         }
         System.out.println(comun.listaPreguntas.size());
 
-        for(int i = 0; i<3;i++){
-
+        for(int i = 0; i<comun.listaPreguntas.size();i++){
 
             //Enviar pregunta al cliente
             Pregunta aux=comun.getPreguntaActual(i);

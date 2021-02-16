@@ -25,7 +25,7 @@ public class Controller implements Initializable {
     @FXML
     TextArea txtCliente;
     @FXML
-    Button btnPregunta;
+    Button btnOtraVez;
     @FXML
     Button btnEnviar;
     @FXML
@@ -45,8 +45,10 @@ public class Controller implements Initializable {
 
     int nPregunta;
     int nPreguntaTotal;
+    int aciertos;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        btnOtraVez.setVisible(false);
         txtNota.setVisible(false);
         txtNotaFinal.setVisible(false);
         int puerto = 44444;
@@ -88,18 +90,20 @@ public class Controller implements Initializable {
 
     }
 
-    public void callBackPregunta(ActionEvent actionEvent) throws IOException {
-        txtCliente.setText(cliente.getPregunta());
-        btnPregunta.setVisible(false);
+    public void callBackOtraVez(ActionEvent actionEvent) throws IOException {
+        //initialize(location,resources);//COMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+        //HiloServidor.run();
+        btnOtraVez.setVisible(false);
         btnEnviar.setVisible(true);
         txtRespuesta.setVisible(true);
-
+        txtNotaFinal.setVisible(false);
+        txtNota.setVisible(false);
     }
     public void callBackEnviar(ActionEvent actionEvent) throws IOException {
         nPregunta = Integer.parseInt(cliente.getnPregunta());
         String respuesta = txtRespuesta.getText();
         cliente.enviarRespuesta(respuesta);
-        btnPregunta.setVisible(true);
+        btnOtraVez.setVisible(true);
         //btnEnviar.setVisible(false);
         //btnRecibirResultado.setVisible(false);
         //txtRespuesta.setVisible(false);
@@ -109,7 +113,6 @@ public class Controller implements Initializable {
         //Puntuacion
         System.out.println("Entramos en puntuacion");
         String resultado = txtCliente.getText();
-        int aciertos;
         if(resultado.equals("Has acertado")){
             System.out.println(resultado);
             aciertos = Integer.parseInt(txtAciertos.getText());
@@ -122,9 +125,13 @@ public class Controller implements Initializable {
             btnEnviar.setVisible(false);
             txtRespuesta.setVisible(false);
             //Sacamos la media
-            txtNotaFinal.setText(String.valueOf((Integer.parseInt(txtAciertos.getText())/Integer.parseInt(txtNumeroPreguntas.getText()))*10));
+            System.out.println(aciertos);
+            float nFinal =(float)aciertos/3*10;//BUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+            System.out.println(nFinal);
+            txtNotaFinal.setText(String.valueOf(nFinal));
             txtNota.setVisible(true);
             txtNotaFinal.setVisible(true);
+            //btnOtraVez.setVisible(true);
         }else{
             //Para que haga las preguntas automaticamente
             txtCliente.setText(cliente.getPregunta());

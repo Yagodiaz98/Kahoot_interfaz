@@ -30,7 +30,7 @@
                         <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RESPONDE A LAS SIGUIENTES PREGUNTAS:" wrappingWidth="298.13671875" />
                         <Button fx:id="btnEnviar" layoutX="550.0" layoutY="255.0" mnemonicParsing="false" onAction="#callBackEnviar" text="Enviar" />
                         <TextField fx:id="txtRespuesta" layoutX="393.0" layoutY="255.0" promptText="Respuesta" />
-                        <Button fx:id="btnPregunta" layoutX="14.0" layoutY="255.0" mnemonicParsing="false" onAction="#callBackPregunta" text="Leer pregunta" />
+                        <Button fx:id="btnOtraVez" layoutX="14.0" layoutY="255.0" mnemonicParsing="false" onAction="#callBackOtraVez" text="Probar otra vez" />
                         <Text fx:id="txtAciertos" layoutX="267.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                            <font>
                               <Font size="82.0" />
