@@ -131,10 +131,12 @@ public class Controller implements Initializable {
             txtNotaFinal.setText(String.valueOf(nFinal));
             txtNota.setVisible(true);
             txtNotaFinal.setVisible(true);
-            //btnOtraVez.setVisible(true);
+            btnOtraVez.setVisible(false);
         }else{
             //Para que haga las preguntas automaticamente
             txtCliente.setText(cliente.getPregunta());
+            //Volvemos a dejar en blanco el textField
+            txtRespuesta.setText("");
         }
     }
 
