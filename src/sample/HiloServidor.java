@@ -1,5 +1,7 @@
 package sample;
 
+import org.omg.Messaging.SyncScopeHelper;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -35,14 +37,16 @@ public class HiloServidor extends Thread{
         }catch(IOException io){
             io.printStackTrace();
         }
+        //Enviamos el numero total de preguntas que hay
+        try {
+            salida.writeUTF(String.valueOf(comun.listaPreguntas.size()));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        System.out.println(comun.listaPreguntas.size());
 
         for(int i = 0; i<3;i++){
-            /*//Enviamos numero pregunta
-            try {
-                salida.writeUTF(String.valueOf(i));
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }*/
+
 
             //Enviar pregunta al cliente
             Pregunta aux=comun.getPreguntaActual(i);
@@ -52,6 +56,14 @@ public class HiloServidor extends Thread{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            //Preguntas que quedan por hacer
+            try {
+                salida.writeUTF(String.valueOf(i+1));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            System.out.println(i);
 
             //Recibir respuesta del cliente
             String respuesta="";

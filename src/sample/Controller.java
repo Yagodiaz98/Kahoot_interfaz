@@ -40,6 +40,8 @@ public class Controller implements Initializable {
 
     ServerSocket servidor;
 
+    int nPregunta;
+    int nPreguntaTotal;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         int puerto = 44444;
@@ -62,12 +64,23 @@ public class Controller implements Initializable {
         //btnRecibirResultado.setVisible(false);
         //txtRespuesta.setVisible(false);
 
-        //Muestra la pregunta desde el principio
+        //Recibimos el numero total de preguntas!!!!!!
+        try {
+            nPreguntaTotal = Integer.parseInt(cliente.getnPregunta());
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+        //Muestra la pregunta desde el principio!!!!!!
         try {
             txtCliente.setText(cliente.getPregunta());
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+    }
+
+    public void callBackComenzar(ActionEvent actionEvent){
+
     }
 
     public void callBackPregunta(ActionEvent actionEvent) throws IOException {
@@ -78,6 +91,7 @@ public class Controller implements Initializable {
 
     }
     public void callBackEnviar(ActionEvent actionEvent) throws IOException {
+        nPregunta = Integer.parseInt(cliente.getnPregunta());
         String respuesta = txtRespuesta.getText();
         cliente.enviarRespuesta(respuesta);
         btnPregunta.setVisible(true);
@@ -85,6 +99,7 @@ public class Controller implements Initializable {
         //btnRecibirResultado.setVisible(false);
         //txtRespuesta.setVisible(false);
         txtCliente.setText(cliente.recibirResultado());
+
 
         //Puntuacion
         System.out.println("Entramos en puntuacion");
@@ -98,9 +113,12 @@ public class Controller implements Initializable {
         }
         System.out.println("Entramos en partidas jugadas");
         txtNumeroPreguntas.setText(String.valueOf(Integer.parseInt(txtNumeroPreguntas.getText())+1));
-
-        //Para que haga las preguntas automaticamente
-        txtCliente.setText(cliente.getPregunta());
+        if(nPregunta == nPreguntaTotal){
+            btnEnviar.setVisible(false);
+        }else{
+            //Para que haga las preguntas automaticamente
+            txtCliente.setText(cliente.getPregunta());
+        }
     }
 
     public void callBackRecibirResultado() throws IOException {

@@ -103,6 +103,11 @@ public class Cliente implements Runnable{
         return pregunta;
     }
 
+    public String getnPregunta() throws IOException {
+        String nPregunta = entrada.readUTF();
+        return nPregunta;
+    }
+
     public void enviarRespuesta(String respuesta) throws IOException {
         salida.writeUTF(respuesta);
     }
