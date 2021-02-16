@@ -46,6 +46,8 @@
                               <Font size="82.0" />
                            </font>
                         </Text>
+                        <Text fx:id="txtNota" layoutX="393.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TU NOTA ES: " />
+                        <Text fx:id="txtNotaFinal" layoutX="468.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children></AnchorPane>
                     </content>
                 </Tab>

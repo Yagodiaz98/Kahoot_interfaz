@@ -36,7 +36,10 @@ public class Controller implements Initializable {
     Text txtAciertos;
     @FXML
     Text txtNumeroPreguntas;
-
+    @FXML
+    Text txtNota;
+    @FXML
+    Text txtNotaFinal;
 
     ServerSocket servidor;
 
@@ -44,6 +47,8 @@ public class Controller implements Initializable {
     int nPreguntaTotal;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        txtNota.setVisible(false);
+        txtNotaFinal.setVisible(false);
         int puerto = 44444;
         Socket s = null;
 
@@ -115,6 +120,11 @@ public class Controller implements Initializable {
         txtNumeroPreguntas.setText(String.valueOf(Integer.parseInt(txtNumeroPreguntas.getText())+1));
         if(nPregunta == nPreguntaTotal){
             btnEnviar.setVisible(false);
+            txtRespuesta.setVisible(false);
+            //Sacamos la media
+            txtNotaFinal.setText(String.valueOf((Integer.parseInt(txtAciertos.getText())/Integer.parseInt(txtNumeroPreguntas.getText()))*10));
+            txtNota.setVisible(true);
+            txtNotaFinal.setVisible(true);
         }else{
             //Para que haga las preguntas automaticamente
             txtCliente.setText(cliente.getPregunta());
