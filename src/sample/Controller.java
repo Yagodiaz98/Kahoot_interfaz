@@ -58,9 +58,16 @@ public class Controller implements Initializable {
                     "<<MENSAJE DE ERROR:1>>", JOptionPane.ERROR_MESSAGE);
         }
 
-        btnEnviar.setVisible(false);
+        //btnEnviar.setVisible(false);
         //btnRecibirResultado.setVisible(false);
-        txtRespuesta.setVisible(false);
+        //txtRespuesta.setVisible(false);
+
+        //Muestra la pregunta desde el principio
+        try {
+            txtCliente.setText(cliente.getPregunta());
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
     public void callBackPregunta(ActionEvent actionEvent) throws IOException {
@@ -74,9 +81,9 @@ public class Controller implements Initializable {
         String respuesta = txtRespuesta.getText();
         cliente.enviarRespuesta(respuesta);
         btnPregunta.setVisible(true);
-        btnEnviar.setVisible(false);
+        //btnEnviar.setVisible(false);
         //btnRecibirResultado.setVisible(false);
-        txtRespuesta.setVisible(false);
+        //txtRespuesta.setVisible(false);
         txtCliente.setText(cliente.recibirResultado());
 
         //Puntuacion
@@ -91,6 +98,9 @@ public class Controller implements Initializable {
         }
         System.out.println("Entramos en partidas jugadas");
         txtNumeroPreguntas.setText(String.valueOf(Integer.parseInt(txtNumeroPreguntas.getText())+1));
+
+        //Para que haga las preguntas automaticamente
+        txtCliente.setText(cliente.getPregunta());
     }
 
     public void callBackRecibirResultado() throws IOException {
