@@ -54,20 +54,25 @@ public class Controller implements Initializable {
         }
 
         btnEnviar.setVisible(false);
-        btnRecibirResultado.setVisible(false);
+        //btnRecibirResultado.setVisible(false);
+        txtRespuesta.setVisible(false);
     }
 
     public void callBackPregunta(ActionEvent actionEvent) throws IOException {
         txtCliente.setText(cliente.getPregunta());
         btnPregunta.setVisible(false);
         btnEnviar.setVisible(true);
+        txtRespuesta.setVisible(true);
 
     }
     public void callBackEnviar(ActionEvent actionEvent) throws IOException {
         String respuesta = txtRespuesta.getText();
         cliente.enviarRespuesta(respuesta);
+        btnPregunta.setVisible(true);
         btnEnviar.setVisible(false);
-        btnRecibirResultado.setVisible(true);
+        //btnRecibirResultado.setVisible(false);
+        txtRespuesta.setVisible(false);
+        txtCliente.setText(cliente.recibirResultado());
     }
 
     public void callBackRecibirResultado() throws IOException {

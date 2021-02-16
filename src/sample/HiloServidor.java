@@ -36,33 +36,43 @@ public class HiloServidor extends Thread{
             io.printStackTrace();
         }
 
-        //Enviar pregunta al cliente
-        Pregunta aux=comun.getPreguntaActual();
-        try {
-            //salidaObjetos.writeObject(aux);
-            salida.writeUTF(aux.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        for(int i = 0; i<3;i++){
+            /*//Enviamos numero pregunta
+            try {
+                salida.writeUTF(String.valueOf(i));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }*/
 
-        //Recibir respuesta del cliente
-        String respuesta="";
-        try {
-            respuesta=entrada.readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        //Comprobar si la respuesta es correcta
-        try {
-            if(comun.getPreguntaActual().correcta==Integer.valueOf(respuesta)) {
-                salida.writeUTF("Has acertado");
-            }else{
-                salida.writeUTF("Has fallado");
+            //Enviar pregunta al cliente
+            Pregunta aux=comun.getPreguntaActual(i);
+            try {
+                //salidaObjetos.writeObject(aux);
+                salida.writeUTF(aux.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            //Recibir respuesta del cliente
+            String respuesta="";
+            try {
+                respuesta=entrada.readUTF();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Comprobar si la respuesta es correcta
+            try {
+                if(comun.getPreguntaActual(i).correcta==Integer.valueOf(respuesta)) {
+                    salida.writeUTF("Has acertado");
+                }else{
+                    salida.writeUTF("Has fallado");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
 
     }
 

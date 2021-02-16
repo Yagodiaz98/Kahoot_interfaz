@@ -30,7 +30,6 @@
                         <Button fx:id="btnEnviar" layoutX="550.0" layoutY="255.0" mnemonicParsing="false" onAction="#callBackEnviar" text="Enviar" />
                         <TextField fx:id="txtRespuesta" layoutX="393.0" layoutY="255.0" promptText="Respuesta" />
                         <Button fx:id="btnPregunta" layoutX="14.0" layoutY="255.0" mnemonicParsing="false" onAction="#callBackPregunta" text="Leer pregunta" />
-                        <Button fx:id="btnRecibirResultado" layoutX="498.0" layoutY="288.0" mnemonicParsing="false" onAction="#callBackRecibirResultado" text="Recibir resultado" />
                      </children></AnchorPane>
                     </content>
                 </Tab>
