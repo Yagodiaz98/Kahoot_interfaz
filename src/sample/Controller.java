@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,6 +32,10 @@ public class Controller implements Initializable {
     Button btnRecibirResultado;
     @FXML
     TextField txtRespuesta;
+    @FXML
+    Text txtAciertos;
+    @FXML
+    Text txtNumeroPreguntas;
 
 
     ServerSocket servidor;
@@ -73,6 +78,19 @@ public class Controller implements Initializable {
         //btnRecibirResultado.setVisible(false);
         txtRespuesta.setVisible(false);
         txtCliente.setText(cliente.recibirResultado());
+
+        //Puntuacion
+        System.out.println("Entramos en puntuacion");
+        String resultado = txtCliente.getText();
+        int aciertos;
+        if(resultado.equals("Has acertado")){
+            System.out.println(resultado);
+            aciertos = Integer.parseInt(txtAciertos.getText());
+            aciertos++;
+            txtAciertos.setText(String.valueOf(aciertos));
+        }
+        System.out.println("Entramos en partidas jugadas");
+        txtNumeroPreguntas.setText(String.valueOf(Integer.parseInt(txtNumeroPreguntas.getText())+1));
     }
 
     public void callBackRecibirResultado() throws IOException {
